@@ -1,4 +1,4 @@
-const { MongoClient, ExplainVerbosity } = require("mongodb");
+const { MongoClient} = require("mongodb");
 // Connection URI
 const uri = process.env.MONGO_URL;
 // Create a new MongoClient
