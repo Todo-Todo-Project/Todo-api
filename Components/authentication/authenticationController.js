@@ -25,6 +25,10 @@ exports.login = async function (req, res) {
   }
 };
 
+exports.googlelogin = (req, res) => {
+
+};
+
 exports.getAllUsers =  async(req, res) =>{
   const user = await authenticationService.getAllUsers(req.body.email);
   if(user.length !== 0){
@@ -33,7 +37,6 @@ exports.getAllUsers =  async(req, res) =>{
     res.status(404).json({message: 'Err!'});
   }
 }
-
 
 exports.getAUser =  async(req, res) =>{
   const user = await authenticationService.getAUser(req.body.email);
