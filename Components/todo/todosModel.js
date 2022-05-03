@@ -1,4 +1,5 @@
 const { ObjectId } = require('mongodb');
+const { TODOS } = require('../../models/collections');
 const { db } = require('../../models/db');
 
 exports.list = async () => {
@@ -38,14 +39,18 @@ exports.update = async (todoId, newBody) => {
 	}
 }
 
+
+
 exports.create = async (newBody) => {
 	try {
-		console.log(newBody.name)
+		console.log('model' + newBody.name)
 		const result = await db()
 			.collection('todos')
-			.insertOne({ name: newBody.name, isCompleted: newBody.isCompleted });
+			.insertOne({ email: newBody.email, name: newBody.name, priority: newBody.priority ,  description: newBody.description, creationdate: newBody.creationdate, duedate: newBody.duedate, isCompleted: newBody.isCompleted })
 		return result;
 	} catch (error) {
 		throw new Error(error);
 	}
 };
+
+

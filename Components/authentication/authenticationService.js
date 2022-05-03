@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 const { db } = require('../../models/db');
 const { USERS } = require('../../models/collections');
 const jwt = require('jsonwebtoken');
+const {ObjectId} = require('mongodb');
 
 exports.register = async (email, password) => {
   const salt = bcrypt.genSaltSync(10);
@@ -32,3 +33,25 @@ exports.createJwt = (user) => {
     expiresIn: '1h',
   });
 };
+
+exports.getAllUsers = async () =>{
+  try{
+    const user = await db().collection(USERS).find().toArray()
+    return user;
+  } catch(err){
+    throw new Error(err);
+  }
+}
+
+exports.getAUser = async (email) =>{
+  try{
+    const users = await db().collection(USERS).find().toArray();
+    users.map(user => {
+      // console.log(user.email + " ||" + user.password);
+      if(user.email === email)
+        return user;
+    })
+  }catch(err){
+    throw new Error(err)
+  }
+}

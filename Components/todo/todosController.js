@@ -29,7 +29,7 @@ exports.update = async (req, res) => {
 
 exports.create = async (req, res) => {
 	const insertOne = await todosService.create(req.body);
-	console.log(res.body)
+	console.log('control' + res.body)
 	if (insertOne) {
 		res.status(200).json({ message: 'Successfully create new todo.' });
 	} else {
