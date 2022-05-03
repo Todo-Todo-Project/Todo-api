@@ -37,3 +37,19 @@ exports.create = async (req, res) => {
 	}
 };
 
+exports.getTodoByEmail = async (req, res) => {
+	const listTodoByEmail = await todosService.getTodoByEmail(req.body);
+	if(listTodoByEmail)
+		res.status(200).json(listTodoByEmail);
+	else
+		res.status(500).json({message: 'Error'});
+}
+
+
+exports.getTodoById = async (req, res) => {
+	const todoById = await todosService.getTodoById(req.body);
+	if(todoById)
+		res.status(200).json(todoById);
+	else	
+		res.status(500).json({message: 'Errors'});
+}
