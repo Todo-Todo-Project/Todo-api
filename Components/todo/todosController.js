@@ -47,7 +47,7 @@ exports.getTodoByEmail = async (req, res) => {
 
 
 exports.getTodoById = async (req, res) => {
-	const todoById = await todosService.getTodoById(req.body);
+	const todoById = await todosService.getTodoById(req.params.id);
 	if(todoById)
 		res.status(200).json(todoById);
 	else	

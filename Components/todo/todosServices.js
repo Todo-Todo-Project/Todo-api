@@ -48,13 +48,20 @@ exports.getTodoByEmail = async (body) => {
 	return arr;
 }
 
-exports.getTodoById = async (body) => {
+exports.getTodoById = async (todoId) => {
 	const todos = await todosModel.list();
 	const temp = [];
 	for(let i = 0; i < todos.length; i++){
-		console.log(todos[i]._id)
+		// console.log(todos[i]._id.equals(todoId));
+		// console.log(new ObjectId(todoId))
+		// if(todos[i]._xid == new ObjectId(todoId))
+			// temp.push(todos[i])
+			// console.log("asadakdnladnals")
+		if(todos[i]._id.equals(todoId))
+			temp.push(todos[i])
 	}
-	console.log(body)
+	console.log(temp)
+	return temp;
 }
 
 function getValueForNextSequence(Sequence){
