@@ -4,7 +4,7 @@ const { db } = require('../../models/db');
 
 exports.list = async () => {
 	try {
-		const todos = await db().collection('todos').find().toArray();
+		const todos = await db().collection(TODOS).find().toArray();
 		return todos;
 	} catch (error) {
 		throw new Error(error);
@@ -14,7 +14,7 @@ exports.list = async () => {
 exports.delete = async (todoId) => {
 	try {
 		const result = await db()
-			.collection('todos')
+			.collection(TODOS)
 			.deleteOne({ _id: ObjectId(todoId) });
 		return result;
 	} catch (error) {
