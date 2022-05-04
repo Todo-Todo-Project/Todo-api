@@ -8,7 +8,7 @@ const cors = require('cors');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const todosRouter = require('./components/todo');
-const listsRouter = require('./Components/list');
+const listsRouter = require('./components/list');
 const authenticationRouter = require('./components/authentication');
 const app = express();
 
