@@ -3,6 +3,8 @@ const e = require('express');
 const { use } = require('passport');
 const { join } = require('path');
 const authenticationService = require('./authenticationService');
+const {OAuth2Client} = require('google-auth-library');
+const client = new OAuth2Client(process.env.REACT_APP_GOOGLE_CLIENT_ID);
 
 exports.register = function (req, res) {
   try {
@@ -26,7 +28,12 @@ exports.login = async function (req, res) {
 };
 
 exports.googlelogin = (req, res) => {
+  const {tokenId} = req.body;
+  client.verifyIdToken({idToken: tokenId, audience: process.env.REACT_APP_GOOGLE_CLIENT_ID}).then(response => {
+    const {email_verified, name, email} = response.payload;
 
+    console.log(response.payload);
+  })
 };
 
 exports.getAllUsers =  async(req, res) =>{
