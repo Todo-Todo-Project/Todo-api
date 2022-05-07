@@ -2,20 +2,20 @@ const { ObjectId } = require("mongodb");
 const { LISTS } = require("../../models/collections");
 const { db } = require("../../models/db");
 
-exports.lists = async () => {
+exports.lists = async (ownerId) => {
   try {
-    const lists = await db().collection(LISTS).find().toArray();
+    const lists = await db().collection(LISTS).find({ownerId: ownerId}).toArray();
     return lists;
   } catch (err) {
     throw new Error(err);
   }
 };
 
-exports.delete = async (listId) => {
+exports.delete = async (ownerId) => {
   try {
     const result = await db()
       .collection()
-      .deleteOne({ _id: ObjectId(listId) });
+      .deleteOne({ownerId:ow});
     return result;
   } catch (err) {
     throw new Error(err);
@@ -46,7 +46,7 @@ exports.create = async (newBody) => {
 		// console.log('model' + newBody.name)
 		const result = await db()
 			.collection(LISTS)
-			.insertOne({ listName:newBody.listName, isCompleted: newBody.isCompleted, listEmail: newBody.listEmail ,todos: newBody.todos })
+			.insertOne({ ownerId: newBody.ownerId, listName:newBody.listName, isCompleted: newBody.isCompleted, listEmail: newBody.listEmail ,todos: newBody.todos })
 		return result;
 	} catch (error) {
 		throw new Error(error);
