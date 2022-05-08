@@ -6,7 +6,7 @@ const {ObjectId} = require('mongodb');
 
 exports.register = async (email, password) => {
   const salt = bcrypt.genSaltSync(10);
-  const hash = bcrypt.hashSync(password, salt);
+  const hash = bcrypt.hashSync(password, salt); 
   return db().collection(USERS).insertOne({
     email,
     password: hash,

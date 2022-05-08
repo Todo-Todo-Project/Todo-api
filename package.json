@@ -23,7 +23,8 @@
     "openid": "^2.0.10",
     "passport": "^0.5.2",
     "passport-jwt": "^4.0.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "react-google-login": "^5.2.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"

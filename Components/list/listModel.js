@@ -11,11 +11,11 @@ exports.lists = async (ownerId) => {
   }
 };
 
-exports.delete = async (ownerId) => {
+exports.delete = async (listId) => {
   try {
     const result = await db()
-      .collection()
-      .deleteOne({ownerId:ow});
+      .collection(LISTS)
+      .deleteOne({listId: listId});
     return result;
   } catch (err) {
     throw new Error(err);
@@ -23,8 +23,8 @@ exports.delete = async (ownerId) => {
 };
 
 
-exports.update = async (listId, newBody) => {
-	const filter = { _id: ObjectId(listId) };
+exports.update = async (ownerId, newBody) => {
+	const filter = { _id: ObjectId(ownerId) };
 	const options = { upsert: newBody.isCompleted };
 	const {_id, ...newBodyDemo} = newBody;
 	const update = { $set: { ...newBodyDemo } };

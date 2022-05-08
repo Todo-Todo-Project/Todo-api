@@ -30,7 +30,8 @@ exports.update = async (req,res) => {
 }
 
 exports.create = async (req, res) => {
-    const ownerId = req.user.id;
+    const ownerId = req.user._id
+    console.log("this" + ownerId);
     const copyBody = {...req.body, ownerId};
     const insertOne = await listsService.create(copyBody);
     if(insertOne) {
