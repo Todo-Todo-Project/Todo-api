@@ -1,7 +1,7 @@
 const listsService = require('./listService')
 
 exports.list = async (req, res) => {
-    const ownerId = req.params._id;
+    const ownerId = req.params.ownerId;
     const lists = await listsService.lists(ownerId);
     if (lists.length !== 0) {
         res.status(202).json(lists);
@@ -20,7 +20,7 @@ exports.delete = async (req, res) => {
 }
 
 exports.update = async (req,res) => {
-    const ownerId = req.user._id;
+    const ownerId = req.params._id;
     const updateOne = await listsService.update(req.params.id, req.body);
     if(updateOne) {
         res.status(202).json({ message: 'Successfully update'});
@@ -30,8 +30,7 @@ exports.update = async (req,res) => {
 }
 
 exports.create = async (req, res) => {
-    const ownerId = req.user._id
-    console.log("this" + ownerId);
+    const ownerId = req.body.ownerId
     const copyBody = {...req.body, ownerId};
     const insertOne = await listsService.create(copyBody);
     if(insertOne) {

@@ -3,6 +3,7 @@ const { LISTS } = require("../../models/collections");
 const { db } = require("../../models/db");
 
 exports.lists = async (ownerId) => {
+	console.log(ownerId)
   try {
     const lists = await db().collection(LISTS).find({ownerId: ownerId}).toArray();
     return lists;

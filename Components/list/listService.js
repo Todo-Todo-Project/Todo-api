@@ -3,8 +3,8 @@ const { db } = require('../../models/db');
 const { TODOS } = require('../../models/collections');
 const { ObjectId } = require('mongodb');
 
-exports.lists = async () => {
-    const lists = await listsModel.lists();
+exports.lists = async (ownerId) => {
+    const lists = await listsModel.lists(ownerId);
     if (lists) return lists
     return null;
 }
