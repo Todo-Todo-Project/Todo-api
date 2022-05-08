@@ -1,7 +1,7 @@
 const listsService = require('./listService')
 
 exports.list = async (req, res) => {
-    const ownerId = req.user._id;
+    const ownerId = req.params._id;
     const lists = await listsService.lists(ownerId);
     if (lists.length !== 0) {
         res.status(202).json(lists);
@@ -30,7 +30,7 @@ exports.update = async (req,res) => {
 }
 
 exports.create = async (req, res) => {
-    const ownerId = req.user._id;
+    const ownerId = req.user.id;
     const copyBody = {...req.body, ownerId};
     const insertOne = await listsService.create(copyBody);
     if(insertOne) {
