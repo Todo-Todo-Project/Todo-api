@@ -25,7 +25,7 @@ exports.update = async (todoId, newBody) => {
 
 exports.create = async (newBody) => {
 	const result = await todosModel.create(newBody);
-	console.log('sevices' + result)
+	console.log('sevices ' + result)
 	if (result.insertedId){
 		// 
 		return result;
@@ -33,6 +33,13 @@ exports.create = async (newBody) => {
 
 	return null;
 };
+
+exports.listByOwnerId = async (ownerId) => {
+	const todos = await todosModel.listByOwnerId(ownerId);
+	if(todos)
+		return todos;
+	return null;
+}
 
 exports.getTodoByEmail = async (body) => {
 	const todos = await todosModel.list();

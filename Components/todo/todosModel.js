@@ -40,12 +40,11 @@ exports.update = async (todoId, newBody) => {
 }
 
 
-
 exports.create = async (newBody) => {
 	try {
-		console.log('model' + newBody.name)
+		console.log('model ' + newBody.name)
 		const result = await db()
-			.collection('todos')
+			.collection(TODOS)
 			.insertOne({ ownerId: newBody.ownerId, listId: newBody.listId, name: newBody.name, priority: newBody.priority ,  description: newBody.description, creationdate: newBody.creationdate, duedate: newBody.duedate, isCompleted: newBody.isCompleted })
 		return result;
 	} catch (error) {
@@ -54,3 +53,12 @@ exports.create = async (newBody) => {
 };
 
 
+exports.listByOwnerId = async (ownerId) => {
+	try{
+		const list = db().collection(TODOS).find({ ownerId: ownerId}).toArray();
+		return list;
+	}
+	catch (err) {
+		throw new Error(err);
+	}
+}

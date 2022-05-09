@@ -1,3 +1,4 @@
+const { restart } = require('nodemon');
 const todosService = require('./todosServices')
 
 exports.list = async (req, res) => {
@@ -29,7 +30,7 @@ exports.update = async (req, res) => {
 
 exports.create = async (req, res) => {
 	const insertOne = await todosService.create(req.body);
-	console.log('control' + res.body)
+	console.log('control ' + res.body)
 	if (insertOne) {
 		res.status(200).json({ message: 'Successfully create new todo.' });
 	} else {
@@ -52,4 +53,14 @@ exports.getTodoById = async (req, res) => {
 		res.status(200).json(todoById);
 	else	
 		res.status(500).json({message: 'Errors'});
+}
+
+exports.listByOwnerId = async (req, res) => {
+	const todos= await todosService.listByOwnerId(req.params.ownerId)
+	if(todos) {
+		res.status(200).json(todos);
+	}
+	else {
+		res.status(500).json({message: 'Errors'});
+	}
 }
