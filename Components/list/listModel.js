@@ -25,8 +25,8 @@ exports.delete = async (listId) => {
 };
 
 
-exports.updateName = async (ownerId, newBody) => {
-	const filter = { _id: ObjectId(ownerId) };
+exports.updateName = async (listId, newBody) => {
+	const filter = { _id: ObjectId(listId) };
 	const options = { upsert: newBody.listName };
 	const {_id, ...newBodyDemo} = newBody;
 	const update = { $set: { ...newBodyDemo } };
