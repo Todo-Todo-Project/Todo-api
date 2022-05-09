@@ -21,8 +21,12 @@ exports.delete = async (req, res) => {
     }
 }
 
+// update name 
+// viet them update add todo
+// viet them update delete todo
 exports.update = async (req,res) => {
-    const ownerId = req.params._id;
+    const listId = req.body._id;
+    const listName = req.body.listName;
     const updateOne = await listsService.update(req.params.id, req.body);
     if(updateOne) {
         res.status(202).json({ message: 'Successfully update'});
