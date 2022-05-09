@@ -2,7 +2,9 @@ const express = require('express');
 const router = express.Router();
 const listsController = require('./listController')
 
-router.get('/:ownerId', listsController.list);
+router.get('/:ownerId', listsController.lists);
+
+router.get('/list/:listId', listsController.listByListId);
 
 router.post('/',listsController.create);
 

@@ -1,6 +1,6 @@
 const listsService = require('./listService')
 
-exports.list = async (req, res) => {
+exports.lists = async (req, res) => {
     const ownerId = req.params.ownerId;
     console.log(ownerId)
     const lists = await listsService.lists(ownerId);
@@ -10,7 +10,15 @@ exports.list = async (req, res) => {
         res.status(404).json({message: 'List not found'});
     }
 }
-
+exports.listByListId = async (req, res) => {
+    const listId = req.params.listId;
+    const list = await listsService.listByListId(listId);
+    if(list.length !== 0) {
+        res.status(200).json(list);
+    }else{
+        res.status(404).json({message: 'List not found'});
+    }
+}
 exports.delete = async (req, res) => {
     const list = await listsService.delete(req.body._id);
     console.log(req.body)
@@ -36,7 +44,7 @@ exports.updateName = async (req,res) => {
 // update add todo
 
 // update delete todo
-    
+
 exports.create = async (req, res) => {
     const ownerId = req.body.ownerId
     const copyBody = {...req.body, ownerId};

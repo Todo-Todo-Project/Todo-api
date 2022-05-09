@@ -12,6 +12,17 @@ exports.lists = async (ownerId) => {
   }
 };
 
+
+exports.listByListId  = async (listId) => {
+	try{
+		const list = db().collection(LISTS).find({listId: listId}).toArray();
+		return list;
+	}
+	catch (err) {
+		throw new Error(err);
+	}
+}
+
 exports.delete = async (listId) => {
 	console.log(listId)
   try {

@@ -9,6 +9,12 @@ exports.lists = async (ownerId) => {
     return null;
 }
 
+exports.listByListId = async (listId) => {
+    const list = await listsModel.listByListId(listId);
+    if(list) return list
+    return null;
+}
+
 exports.delete = async (listId) => {
     console.log(listId)
     const result = await listsModel.delete(listId);
