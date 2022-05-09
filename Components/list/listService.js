@@ -18,7 +18,7 @@ exports.delete = async (listId) => {
 
 
 exports.updateName = async (listId, newBody) => {
-    const result = await listsModel.update(listId, newBody);
+    const result = await listsModel.updateName(listId, newBody);
     if (result.modifiedCount) return result;
     return null;
 }
