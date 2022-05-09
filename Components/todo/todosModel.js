@@ -62,3 +62,13 @@ exports.listByOwnerId = async (ownerId) => {
 		throw new Error(err);
 	}
 }
+
+exports.listByListId = async (listId) => {
+	try{
+		const list = db().collection(TODOS).find({ listId: listId}).toArray();
+		return list;
+	}
+	catch (err) {
+		throw new Error(err);
+	}
+}

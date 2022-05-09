@@ -64,3 +64,13 @@ exports.listByOwnerId = async (req, res) => {
 		res.status(500).json({message: 'Errors'});
 	}
 }
+
+exports.listByListId = async (req, res) => {
+	const todos= await todosService.listByListId(req.params.ownerId)
+	if(todos) {
+		res.status(200).json(todos);
+	}
+	else {
+		res.status(500).json({message: 'Errors'});
+	}
+}

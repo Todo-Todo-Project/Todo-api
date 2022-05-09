@@ -6,6 +6,8 @@ router.get('/', todosController.list);
 
 router.get('/:ownerId', todosController.listByOwnerId);
 
+router.get('/list/:listId', todosController.listByListId);
+
 router.post('/', todosController.create);
 
 router.put('/:id', todosController.update);

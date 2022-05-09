@@ -41,6 +41,14 @@ exports.listByOwnerId = async (ownerId) => {
 	return null;
 }
 
+
+exports.listByListId = async (listId) => {
+	const todos = await todosModel.listByListId(listId);
+	if(todos)
+		return todos;
+	return null;
+}
+
 exports.getTodoByEmail = async (body) => {
 	const todos = await todosModel.list();
 	const arr = [];
