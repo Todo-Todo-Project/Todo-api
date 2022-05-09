@@ -6,7 +6,7 @@ router.get('/:ownerId', listsController.list);
 
 router.post('/',listsController.create);
 
-router.put('/:listId', listsController.update);
+router.put('/', listsController.update);
 
 router.delete('/', listsController.delete);
 
