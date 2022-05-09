@@ -10,6 +10,7 @@ exports.lists = async (ownerId) => {
 }
 
 exports.delete = async (listId) => {
+    console.log(listId)
     const result = await listsModel.delete(listId);
     if (result.deletedCount) return result;
     return null; 

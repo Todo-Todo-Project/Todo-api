@@ -13,10 +13,11 @@ exports.lists = async (ownerId) => {
 };
 
 exports.delete = async (listId) => {
+	console.log(listId)
   try {
     const result = await db()
       .collection(LISTS)
-      .deleteOne({listId: listId});
+      .deleteOne({"_id": ObjectId(listId)});
     return result;
   } catch (err) {
     throw new Error(err);
