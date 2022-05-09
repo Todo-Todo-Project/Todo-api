@@ -22,18 +22,20 @@ exports.delete = async (req, res) => {
 }
 
 // update name 
-// viet them update add todo
-// viet them update delete todo
-exports.update = async (req,res) => {
+exports.updateName = async (req,res) => {
     const listId = req.body._id;
     const listName = req.body.listName;
-    const updateOne = await listsService.update(req.params.id, req.body);
+    const updateOne = await listsService.updateName(listId, listName);
     if(updateOne) {
         res.status(202).json({ message: 'Successfully update'});
     }else{
         res.status(404).json({message: 'List not found'});
     }
 }
+
+// update add todo
+
+// update delete todo
 
 exports.create = async (req, res) => {
     const ownerId = req.body.ownerId
