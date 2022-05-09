@@ -12,9 +12,10 @@ exports.lists = async (req, res) => {
 }
 exports.listByListId = async (req, res) => {
     const listId = req.params.listId;
+    console.log("control " + listId);
     const list = await listsService.listByListId(listId);
     if(list.length !== 0) {
-        res.status(200).json(list);
+        res.status(202).json(list);
     }else{
         res.status(404).json({message: 'List not found'});
     }

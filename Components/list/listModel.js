@@ -14,8 +14,10 @@ exports.lists = async (ownerId) => {
 
 
 exports.listByListId  = async (listId) => {
+
+	console.log("model " + listId);
 	try{
-		const list = db().collection(LISTS).find({listId: listId}).toArray();
+		const list = db().collection(LISTS).find({ _id: ObjectId(listId)}).toArray();
 		return list;
 	}
 	catch (err) {
