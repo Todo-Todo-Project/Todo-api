@@ -64,8 +64,9 @@ exports.listByOwnerId = async (ownerId) => {
 }
 
 exports.listByListId = async (listId) => {
+	console.log(listId)
 	try{
-		const list = db().collection(TODOS).find({ listId: listId}).toArray();
+		const list = db().collection(TODOS).find({ listId:listId}).toArray();
 		return list;
 	}
 	catch (err) {

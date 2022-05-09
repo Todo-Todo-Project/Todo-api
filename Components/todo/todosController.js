@@ -66,7 +66,7 @@ exports.listByOwnerId = async (req, res) => {
 }
 
 exports.listByListId = async (req, res) => {
-	const todos= await todosService.listByListId(req.params.ownerId)
+	const todos= await todosService.listByListId(req.params.listId)
 	if(todos) {
 		res.status(200).json(todos);
 	}
