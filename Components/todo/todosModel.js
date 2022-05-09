@@ -46,7 +46,7 @@ exports.create = async (newBody) => {
 		console.log('model' + newBody.name)
 		const result = await db()
 			.collection('todos')
-			.insertOne({ ownerId: newBody.ownerId, name: newBody.name, priority: newBody.priority ,  description: newBody.description, creationdate: newBody.creationdate, duedate: newBody.duedate, isCompleted: newBody.isCompleted })
+			.insertOne({ ownerId: newBody.ownerId, listId: newBody.listId, name: newBody.name, priority: newBody.priority ,  description: newBody.description, creationdate: newBody.creationdate, duedate: newBody.duedate, isCompleted: newBody.isCompleted })
 		return result;
 	} catch (error) {
 		throw new Error(error);
