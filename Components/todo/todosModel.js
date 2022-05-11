@@ -1,9 +1,10 @@
 const { ObjectId } = require('mongodb');
+const { TODOS } = require('../../models/collections');
 const { db } = require('../../models/db');
 
 exports.list = async () => {
 	try {
-		const todos = await db().collection('todos').find().toArray();
+		const todos = await db().collection(TODOS).find().toArray();
 		return todos;
 	} catch (error) {
 		throw new Error(error);
@@ -13,7 +14,7 @@ exports.list = async () => {
 exports.delete = async (todoId) => {
 	try {
 		const result = await db()
-			.collection('todos')
+			.collection(TODOS)
 			.deleteOne({ _id: ObjectId(todoId) });
 		return result;
 	} catch (error) {
@@ -38,14 +39,37 @@ exports.update = async (todoId, newBody) => {
 	}
 }
 
+
 exports.create = async (newBody) => {
 	try {
-		console.log(newBody.name)
+		console.log('model ' + newBody.name)
 		const result = await db()
-			.collection('todos')
-			.insertOne({ name: newBody.name, isCompleted: newBody.isCompleted });
+			.collection(TODOS)
+			.insertOne({ ownerId: newBody.ownerId, listId: newBody.listId, name: newBody.name, priority: newBody.priority ,  description: newBody.description, creationdate: newBody.creationdate, duedate: newBody.duedate, isCompleted: newBody.isCompleted })
 		return result;
 	} catch (error) {
 		throw new Error(error);
 	}
 };
+
+
+exports.listByOwnerId = async (ownerId) => {
+	try{
+		const list = db().collection(TODOS).find({ ownerId: ownerId}).toArray();
+		return list;
+	}
+	catch (err) {
+		throw new Error(err);
+	}
+}
+
+exports.listByListId = async (listId) => {
+	console.log(listId)
+	try{
+		const list = db().collection(TODOS).find({ listId:listId}).toArray();
+		return list;
+	}
+	catch (err) {
+		throw new Error(err);
+	}
+}
