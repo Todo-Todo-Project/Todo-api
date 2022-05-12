@@ -5,6 +5,7 @@ const { join } = require('path');
 const authenticationService = require('./authenticationService');
 const {OAuth2Client, UserRefreshClient} = require('google-auth-library');
 const client = new OAuth2Client(process.env.REACT_APP_GOOGLE_CLIENT_ID);
+const { USERS } = require('../../models/collections');
 
 exports.register = function (req, res) {
   try {
@@ -27,20 +28,19 @@ exports.login = async function (req, res) {
   }
 };
 
-exports.googlelogin = (req, res) => {
-  const {tokenId} = req.body;
-  client.verifyIdToken({idToken: tokenId, audience: process.env.REACT_APP_GOOGLE_CLIENT_ID}).then(response => {
-    const {email_verified, name, email} = response.payload;
-    try {
-      const loginInfo = authenticationService.login(email, email);
-      res.status(200).send({
-        user: { _id: loginInfo._id, email: loginInfo.email },
-        accessToken: authenticationService.createJwt(loginInfo),
-      });
-    } catch (err) {
-      res.status(401).send(err);
-    }
-  })
+exports.googlelogin = async (req, res) => {
+  try {
+    const {tokenId} = req.body;
+    const ticket = await client.verifyIdToken({idToken: tokenId, audience: process.env.REACT_APP_GOOGLE_CLIENT_ID});
+    const {email} = ticket.getPayload();
+    const loginInfo = await authenticationService.login(email, email);
+    res.status(200).send({
+      user: { _id: loginInfo._id, email: loginInfo.email },
+      accessToken: authenticationService.createJwt(loginInfo),
+    });
+  } catch (err) {
+    res.status(401).send(err);
+  }
 };
 
 exports.googleregister = (req, res) => {
